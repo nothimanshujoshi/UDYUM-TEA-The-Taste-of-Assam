@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDYUM TEA | The Taste of Assam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           CSS VARIABLES (Brand Color Palette)
+           ========================================= */
+        :root {
+            --dark-green: #143621;   /* Deeper, richer green */
+            --tea-brown: #7A4326;    /* Warm tea brown */
+            --cream: #FAF7F2;        /* Soft off-white */
+            --accent-gold: #C5A059;  /* Elegant, muted gold */
+            --text-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* =========================================
+           GLOBAL STYLES
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); color: var(--dark-green); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+        .section-padding { padding: 6rem 0; }
+        .text-center { text-align: center; }
+        
+        /* Premium Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-family: var(--font-body);
+        }
+        .btn-primary {
+            background-color: var(--dark-green);
+            color: var(--accent-gold);
+            border: 1px solid var(--dark-green);
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-gold);
+            color: var(--dark-green);
+            border-color: var(--accent-gold);
+        }
+        .btn-gold {
+            background-color: var(--accent-gold);
+            color: var(--text-light);
+            border: 1px solid var(--accent-gold);
+        }
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--accent-gold);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark-green);
+        }
+        .section-subtitle {
+            font-family: var(--font-body);
+            color: var(--tea-brown);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           TOP BAR & HEADER
+           ========================================= */
+        .top-bar {
+            background-color: var(--tea-brown);
+            color: var(--cream);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        header {
+            background-color: rgba(250, 247, 242, 0.98);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(20, 54, 33, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { text-align: center; }
+        .logo-main {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+        .logo-sub {
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            display: block;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a {
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            color: var(--dark-green);
+        }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .cart-icon {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--dark-green);
+            padding-bottom: 2px;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(20, 54, 33, 0.4), rgba(20, 54, 33, 0.7)), url('https://images.unsplash.com/photo-1582792614666-419fa761cce1?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-content { max-width: 900px; margin: 0 auto; color: var(--text-light); }
+        .hero h1 {
+            color: var(--cream);
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-style: italic;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: var(--cream);
+        }
+        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; }
+
+        /* =========================================
+           TRUST BADGES
+           ========================================= */
+        .trust-badges { background-color: var(--cream); padding: 2rem 0; border-bottom: 1px solid #EBE5D9; }
+        .trust-container {
+            display: flex; justify-content: space-between; flex-wrap: wrap; text-align: center;
+        }
+        .badge-item {
+            display: flex; align-items: center; gap: 12px; font-family: var(--font-body);
+            font-weight: 500; letter-spacing: 1px; color: var(--dark-green); text-transform: uppercase; font-size: 0.85rem;
+        }
+        .badge-icon { font-size: 1.5rem; color: var(--accent-gold); }
+
+        /* =========================================
+           FEATURED COLLECTIONS (Categories)
+           ========================================= */
+        .category-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+        }
+        .category-card { text-align: center; cursor: pointer; group;}
+        .cat-img-wrapper {
+            width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden;
+            margin-bottom: 1.5rem; border: 1px solid var(--accent-gold); padding: 8px;
+            transition: var(--transition);
+        }
+        .cat-img {
+            width: 100%; height: 100%; border-radius: 50%; background-size: cover; background-position: center;
+            transition: transform 0.7s ease;
+        }
+        .category-card:hover .cat-img { transform: scale(1.1); }
+        .category-card:hover .cat-img-wrapper { border-color: var(--dark-green); }
+        .cat-img-1 { background-image: url('https://images.pexels.com/photos/227908/pexels-photo-227908.jpeg?q=80&w=600&auto=format&fit=crop'); }
+        .cat-img-2 { background-image: url('https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=600&auto=format&fit=crop'); }
+        .cat-img-3 { background-image: url('https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?q=80&w=600&auto=format&fit=crop'); }
+        .cat-img-4 { background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop'); }
+        .category-card h3 { font-size: 1.4rem; font-style: italic; }
+
+        /* =========================================
+           STORY SECTION
+           ========================================= */
+        .story-section { background-color: var(--dark-green); color: var(--cream); }
+        .story-section h2 { color: var(--accent-gold); }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .story-img-wrapper { position: relative; padding: 2rem 0 0 2rem; }
+        .story-img-wrapper::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 80%; height: 80%;
+            border: 2px solid var(--accent-gold); z-index: 0;
+        }
+        .story-img {
+            width: 100%; position: relative; z-index: 1; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .story-content h2 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .story-content p { margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.9; }
+
+        /* =========================================
+           BEST SELLERS
+           ========================================= */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        .product-card {
+            background: #fff; text-align: center; transition: var(--transition);
+            border: 1px solid #EBE5D9; position: relative;
+        }
+        .product-card:hover { box-shadow: 0 15px 35px rgba(20, 54, 33, 0.08); transform: translateY(-5px); }
+        .product-img { height: 320px; background-size: cover; background-position: center; border-bottom: 1px solid #EBE5D9; }
+        .prod-1 { background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop'); }
+        .prod-2 { background-image: url('https://images.pexels.com/photos/227908/pexels-photo-227908.jpeg?q=80&w=800&auto=format&fit=crop'); }
+        .prod-3 { background-image: url('https://images.pexels.com/photos/20270270/pexels-photo-20270270.jpeg?q=80&w=800&auto=format&fit=crop'); }
+        .product-info { padding: 2rem 1.5rem; }
+        .product-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .product-desc { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .product-price { color: var(--dark-green); font-weight: 600; font-size: 1.3rem; margin-bottom: 1.5rem; }
+        .btn-cart {
+            width: 100%; background: transparent; color: var(--dark-green); border: 1px solid var(--dark-green);
+            padding: 12px; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+        .btn-cart:hover { background: var(--dark-green); color: var(--accent-gold); }
+        .amazon-badge {
+            position: absolute; top: 15px; right: 15px; background: #FF9900; color: #fff;
+            font-size: 0.7rem; font-weight: bold; padding: 4px 8px; border-radius: 2px; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* =========================================
+           WHY CHOOSE US (Icons)
+           ========================================= */
+        .why-us { background-color: var(--cream); border-top: 1px solid #EBE5D9; }
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+        .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--dark-green); }
+        .feature-box h3 { font-size: 1.2rem; margin-bottom: 0.5rem; font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .feature-box p { font-size: 0.9rem; color: #555; }
+
+        /* =========================================
+           CUSTOMER REVIEWS
+           ========================================= */
+        .reviews { background-color: #F3EFE6; }
+        .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .review-card {
+            background: #fff; padding: 2.5rem; border: 1px solid #EBE5D9; position: relative;
+        }
+        .stars { color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 1rem; }
+        .review-text { font-family: var(--font-heading); font-size: 1.1rem; font-style: italic; color: #444; margin-bottom: 1.5rem; line-height: 1.8; }
+        .reviewer-name { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-green); }
+        .quote-icon { position: absolute; top: 20px; right: 20px; font-size: 4rem; color: rgba(197, 160, 89, 0.1); font-family: serif; line-height: 1; }
+
+        /* =========================================
+           TEA EDUCATION (BLOG PREVIEWS)
+           ========================================= */
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .blog-card { background: #fff; overflow: hidden; border: 1px solid #EBE5D9; transition: var(--transition); }
+        .blog-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .blog-img { height: 240px; background-size: cover; background-position: center; }
+        .blog-img-1 { background-image: url('https://images.pexels.com/photos/27489187/pexels-photo-27489187.jpeg?q=80&w=800&auto=format&fit=crop'); }
+        .blog-img-2 { background-image: url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?q=80&w=800&auto=format&fit=crop'); }
+        .blog-img-3 { background-image: url('https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop'); }
+        .blog-info { padding: 2rem; }
+        .blog-tag { color: var(--accent-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 0.5rem; display: block; }
+        .blog-info h3 { font-size: 1.4rem; margin-bottom: 1rem; line-height: 1.3; }
+        .read-more { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--tea-brown); border-bottom: 1px solid var(--tea-brown); padding-bottom: 2px; }
+
+        /* =========================================
+           NEWSLETTER
+           ========================================= */
+        .newsletter { background-color: var(--dark-green); color: var(--cream); text-align: center; }
+        .newsletter h2 { color: var(--accent-gold); font-size: 3rem; margin-bottom: 1rem; }
+        .newsletter p { margin-bottom: 2.5rem; font-size: 1.1rem; opacity: 0.9; }
+        .newsletter-form { display: flex; justify-content: center; max-width: 600px; margin: 0 auto; }
+        .newsletter-form input {
+            padding: 18px 24px; width: 70%; border: 1px solid var(--accent-gold);
+            background: transparent; color: var(--cream); font-family: var(--font-body); font-size: 1rem; outline: none;
+        }
+        .newsletter-form input::placeholder { color: rgba(250, 247, 242, 0.5); }
+        .newsletter-form button {
+            width: 30%; background: var(--accent-gold); color: var(--dark-green); border: none;
+            font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: var(--transition);
+        }
+        .newsletter-form button:hover { background: var(--cream); }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer { background-color: #112A1A; color: #A0AAB2; padding: 5rem 0 2rem; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-col h4 { color: var(--cream); margin-bottom: 1.5rem; font-size: 1.1rem; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 2px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 1rem; }
+        .footer-col a { transition: var(--transition); }
+        .footer-col a:hover { color: var(--accent-gold); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); color: #666; }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .category-grid, .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .review-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .story-img-wrapper { padding: 0; }
+            .story-img-wrapper::before { display: none; }
+            .review-grid, .blog-grid, .footer-grid { grid-template-columns: 1fr; }
+            .trust-container { flex-direction: column; gap: 15px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-form input, .newsletter-form button { width: 100%; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        Complimentary Pan-India Shipping on Orders Over ₹999
+    </div>
+
+    <header>
+        <div class="container nav-container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Shop Tea</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Our Story</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="logo">
+                <div class="logo-main">UDYUM TEA</div>
+                <div class="logo-sub">The Taste of Assam</div>
+            </a>
+            <nav>
+                <ul class="nav-links" style="gap: 2rem;">
+                    <li><a href="#">Learn</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="cart-icon">Cart (0)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>From Assam Gardens<br>to Your Cup</h1>
+            <p>Authentic, garden-fresh premium tea delivered straight to your kitchen. Experience the rich heritage and unparalleled freshness of India's finest estates.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary">Shop The Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="trust-badges">
+        <div class="container trust-container">
+            <div class="badge-item"><span class="badge-icon">🌿</span> 100% Authentic Assam Tea</div>
+            <div class="badge-item"><span class="badge-icon">🍃</span> Fresh Garden Sourcing</div>
+            <div class="badge-item"><span class="badge-icon">🚫</span> No Middlemen</div>
+            <div class="badge-item"><span class="badge-icon">📦</span> Delivered Pan India</div>
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Explore by Category</h2>
+                <p class="section-subtitle">Curated specifically for every palate</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="cat-img-wrapper"><div class="cat-img cat-img-1"></div></div>
+                    <h3>Premium Loose Leaf</h3>
+                </div>
+                <div class="category-card">
+                    <div class="cat-img-wrapper"><div class="cat-img cat-img-2"></div></div>
+                    <h3>Assam CTC Tea</h3>
+                </div>
+                <div class="category-card">
+                    <div class="cat-img-wrapper"><div class="cat-img cat-img-3"></div></div>
+                    <h3>Masala Chai Blends</h3>
+                </div>
+                <div class="category-card">
+                    <div class="cat-img-wrapper"><div class="cat-img cat-img-4"></div></div>
+                    <h3>Gift Packs</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding story-section">
+        <div class="container story-grid">
+            <div class="story-img-wrapper">
+                <img src="https://images.pexels.com/photos/2835599/pexels-photo-2835599.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Premium Assam Tea Leaves" class="story-img">
+            </div>
+            <div class="story-content">
+                <p class="section-subtitle" style="color: var(--accent-gold); margin-bottom: 1rem;">The Udyum Promise</p>
+                <h2>The True Taste<br>of Assam</h2>
+                <p>We believe that the best tea doesn't sit in warehouses for months. UDYUM TEA was born from a passion to bridge the gap between lush Assamese tea estates and modern Indian homes.</p>
+                <p>By eliminating middlemen, we ensure that the leaves you brew are fresh, ethically sourced, and bursting with the rich, malty flavor that authentic Assam tea is world-famous for.</p>
+                <a href="#" class="btn btn-gold" style="margin-top: 1.5rem;">Read Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Our Best Sellers</h2>
+                <p class="section-subtitle">Customer favorites, straight from the garden</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="amazon-badge">Also on Amazon</div>
+                    <div class="product-img prod-1"></div>
+                    <div class="product-info">
+                        <h3>Kadak Assam CTC</h3>
+                        <p class="product-desc">Strong, bold, and malty everyday chai.</p>
+                        <div class="product-price">₹450</div>
+                        <button class="btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img prod-2"></div>
+                    <div class="product-info">
+                        <h3>Orthodox Loose Leaf</h3>
+                        <p class="product-desc">Premium whole leaf for a refined cup.</p>
+                        <div class="product-price">₹650</div>
+                        <button class="btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="amazon-badge">Also on Amazon</div>
+                    <div class="product-img prod-3"></div>
+                    <div class="product-info">
+                        <h3>Royal Masala Chai</h3>
+                        <p class="product-desc">Infused with natural Indian spices.</p>
+                        <div class="product-price">₹550</div>
+                        <button class="btn-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding why-us">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 4rem;">
+                <h2 class="section-title">The Udyum Difference</h2>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Direct Sourcing</h3>
+                    <p>Straight from estates to your cup, skipping middlemen for maximum freshness.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Quality</h3>
+                    <p>Handpicked leaves, expertly graded for perfect aroma and strength.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌿</div>
+                    <h3>100% Natural</h3>
+                    <p>No artificial flavors or colors. Just pure, unadulterated Assamese tea.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Ethically Grown</h3>
+                    <p>Supporting local tea farmers and sustainable agricultural practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding reviews">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Loved by Tea Drinkers</h2>
+                <p class="section-subtitle">Real reviews from our community</p>
+            </div>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The most authentic Assam tea I have had outside of Assam. The aroma when you open the packet is incredible, and the taste is perfectly malty and strong."</p>
+                    <p class="reviewer-name">— Rohan Sharma</p>
+                </div>
+                <div class="review-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Shifted from a big supermarket brand to Udyum and I'm never going back. The Masala Chai blend is perfectly spiced. You can literally taste the freshness."</p>
+                    <p class="reviewer-name">— Priya Patel</p>
+                </div>
+                <div class="review-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I bought the gift pack for my parents who are absolute tea snobs, and they loved it. The packaging feels premium and the loose leaf quality is top-notch."</p>
+                    <p class="reviewer-name">— Anjali Desai</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Tea Education</h2>
+                <p class="section-subtitle">Learn the art of the perfect brew</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img blog-img-1"></div>
+                    <div class="blog-info">
+                        <span class="blog-tag">Brewing Guide</span>
+                        <h3>Difference Between CTC & Orthodox Tea Explained</h3>
+                        <br>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img blog-img-2"></div>
+                    <div class="blog-info">
+                        <span class="blog-tag">Health & Wellness</span>
+                        <h3>The Incredible Health Benefits of Daily Assam Tea</h3>
+                        <br>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img blog-img-3"></div>
+                    <div class="blog-info">
+                        <span class="blog-tag">Recipes</span>
+                        <h3>How to Brew the Perfect Cup of Indian Masala Chai</h3>
+                        <br>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding newsletter">
+        <div class="container">
+            <h2>Join the Tea Club</h2>
+            <p>Subscribe for exclusive brewing tips, early access to new blends, and 10% off your first D2C order.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address..." required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo-main" style="color: var(--cream); font-size: 1.8rem;">UDYUM TEA</div>
+                    <div class="logo-sub" style="margin-bottom: 1.5rem;">The Taste of Assam</div>
+                    <p style="line-height: 1.8;">Delivering the authentic, garden-fresh taste of premium Assam tea directly to modern Indian kitchens. No middlemen, just pure tea.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">Assam CTC</a></li>
+                        <li><a href="#">Loose Leaf</a></li>
+                        <li><a href="#">Masala Chai</a></li>
+                        <li><a href="#">Gift Boxes</a></li>
+                        <li><a href="#">Subscribe & Save</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Garden Sourcing</a></li>
+                        <li><a href="#">Tea Education</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Find Us</h4>
+                    <ul>
+                        <li><a href="#">Official Webstore</a></li>
+                        <li><a href="#">Amazon India</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 UDYUM TEA. All Rights Reserved. Crafted for D2C Growth.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
